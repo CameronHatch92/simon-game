@@ -1,4 +1,8 @@
-/* global playMechanics */
+/* global playMechanics, boardDetails, $ */
 'use strict';
 
-playMechanics.randomColor();
+const main = function(){
+  boardDetails.bindColorClickers();
+};
+
+$(main);

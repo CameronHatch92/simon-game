@@ -10,12 +10,19 @@ const playMechanics = (function(){
     return `q${randNum}`;
   };
 
+  const addColorToArr = function(){
+    seqArr.push(randomColor());
+  };
+
   const handleStartClicked = function(){
     $('#start-button').on('click', function(event){
       
     });
   };
+
   return {
-    randomColor
+    addColorToArr,
+    seqArr
   };
 })();
+
