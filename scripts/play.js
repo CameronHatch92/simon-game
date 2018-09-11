@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, boardDetails */
 'use strict';
 
 const playMechanics = (function(){
@@ -20,9 +20,27 @@ const playMechanics = (function(){
     });
   };
 
+  const playSeqArr = function(){
+    addColorToArr();
+    addColorToArr();
+    console.log(seqArr);
+    for (let i of seqArr){
+      boardDetails.playRightQ(i);
+    }
+  };
+
+  const test = function(){
+    $('#start-button').on('click', function(event){
+      boardDetails.playRightQ('q1');
+      console.log('hello');
+    });
+  };
   return {
     addColorToArr,
-    seqArr
+    playSeqArr,
+    test
   };
 })();
+
+
 

@@ -3,6 +3,7 @@
 
 const main = function(){
   boardDetails.bindColorClickers();
+  playMechanics.test();
 };
 
 $(main);
