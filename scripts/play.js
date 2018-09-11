@@ -29,16 +29,9 @@ const playMechanics = (function(){
     }
   };
 
-  const test = function(){
-    $('#start-button').on('click', function(event){
-      boardDetails.playRightQ('q1');
-      console.log('hello');
-    });
-  };
   return {
     addColorToArr,
-    playSeqArr,
-    test
+    playSeqArr
   };
 })();
 

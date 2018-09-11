@@ -76,16 +76,16 @@ const boardDetails = (function(){
   const playRightQ = function(id){
     switch(id) {
     case 'q1':
-      q1Clicked();
+      q1Play();
       break;
     case 'q2':
-      q2Clicked();
+      q2Play();
       break;
     case 'q3':
-      q3Clicked();
+      q3Play();
       break;
     case 'q4':
-      q4Clicked();
+      q4Play();
       break;      
     }
   };
@@ -99,6 +99,7 @@ const boardDetails = (function(){
 
   return {
     bindColorClickers,
-    playRightQ
+    playRightQ,
+    q1Play
   };
 })();
