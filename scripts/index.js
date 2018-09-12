@@ -2,8 +2,7 @@
 'use strict';
 
 const main = function(){
-  boardDetails.bindColorClickers();
-  playMechanics.handleStartClicked();
+  playMechanics.bindEventListeners();
 };
 
 $(main);

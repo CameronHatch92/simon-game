@@ -14,12 +14,6 @@ const playMechanics = (function(){
     seqArr.push(randomColor());
   };
 
-  const handleStartClicked = function(){
-    $('#start-button').on('click', function(event){
-      playSeqArr();
-    });
-  };
-
   const playSeqArr = function(){
     let i = 0;
     function loop(){
@@ -34,9 +28,47 @@ const playMechanics = (function(){
     loop();
   };
 
+  const q1Clicked = function(){
+    $('#q1').on('click', function(event){
+      boardDetails.q1Play();
+    });
+  };
+
+  const q2Clicked = function(){
+    $('#q2').on('click', function(event){
+      boardDetails.q2Play();
+    });
+  };
+
+  const q3Clicked = function(){
+    $('#q3').on('click', function(event){
+      boardDetails.q3Play();
+    });
+  };
+
+  const q4Clicked = function(){
+    $('#q4').on('click', function(event){
+      boardDetails.q4Play();
+    });
+  };
+
+  const handleStartClicked = function(){
+    $('#start-button').on('click', function(event){
+      playSeqArr();
+    });
+  };
+
+  const bindEventListeners = function(){
+    q1Clicked();
+    q2Clicked();
+    q3Clicked();
+    q4Clicked();
+    handleStartClicked();
+  };
+
   return {
     addColorToArr,
-    handleStartClicked
+    bindEventListeners
   };
 })();
 
