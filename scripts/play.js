@@ -16,22 +16,27 @@ const playMechanics = (function(){
 
   const handleStartClicked = function(){
     $('#start-button').on('click', function(event){
-      
+      playSeqArr();
     });
   };
 
   const playSeqArr = function(){
-    addColorToArr();
-    addColorToArr();
-    console.log(seqArr);
-    for (let i of seqArr){
-      boardDetails.playRightQ(i);
-    }
+    let i = 0;
+    function loop(){
+      setTimeout(function(){
+        boardDetails.playRightQ(seqArr[i]);
+        i++;
+        if (i < seqArr.length){
+          loop();
+        }
+      }, 850);
+    } 
+    loop();
   };
 
   return {
     addColorToArr,
-    playSeqArr
+    handleStartClicked
   };
 })();
 

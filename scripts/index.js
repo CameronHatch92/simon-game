@@ -3,7 +3,7 @@
 
 const main = function(){
   boardDetails.bindColorClickers();
-  playMechanics.playSeqArr();
+  playMechanics.handleStartClicked();
 };
 
 $(main);
