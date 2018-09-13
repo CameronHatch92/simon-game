@@ -37,15 +37,22 @@ const playMechanics = (function(){
         disableClicks();
       } else if (i === seqArr.length-1){
         goodToGo();
-      }
+      } 
     }
   };
 
   const disableClicks = function(){
-    $('q1').off('click');
-    $('q2').off('click');
-    $('q3').off('click');
-    $('q4').off('click');
+    $('#q1').prop('disabled', true);
+    $('#q2').prop('disabled', true);
+    $('#q3').prop('disabled', true);
+    $('#q4').prop('disabled', true);
+  };
+
+  const enableClicks = function(){
+    $('#q1').prop('disabled', false);
+    $('#q2').prop('disabled', false);
+    $('#q3').prop('disabled', false);
+    $('#q4').prop('disabled', false);
   };
 
   const restart = function(){
@@ -62,36 +69,36 @@ const playMechanics = (function(){
 
   const q1Clicked = function(){
     $('#q1').on('click', function(event){
-      boardDetails.q1Play();
       respArr.push('q1');
       checkStatus();
+      boardDetails.q1Play();
       console.log(respArr, seqArr);
     });
   };
 
   const q2Clicked = function(){
     $('#q2').on('click', function(event){
-      boardDetails.q2Play();
       respArr.push('q2');
       checkStatus();
+      boardDetails.q2Play();
       console.log(respArr, seqArr);
     });
   };
 
   const q3Clicked = function(){
     $('#q3').on('click', function(event){
-      boardDetails.q3Play();
       respArr.push('q3');
       checkStatus();
+      boardDetails.q3Play();
       console.log(respArr, seqArr);
     });
   };
 
   const q4Clicked = function(){
     $('#q4').on('click', function(event){
-      boardDetails.q4Play();
       respArr.push('q4');
       checkStatus();
+      boardDetails.q4Play();
       console.log(respArr, seqArr);
     });
   };
@@ -101,6 +108,7 @@ const playMechanics = (function(){
       restart();
       addColorToArr();
       playSeqArr();
+      enableClicks();
     });
   };
 
