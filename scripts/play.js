@@ -20,6 +20,10 @@ const playMechanics = (function(){
   // -- enables/disables clicks
   // -- updated counter
 
+  const render = function(){
+    console.log('rendered');
+  };
+
   // function to play through seqArr
   // -- enables clicks after it's done and renders
   let i = 0;
@@ -37,12 +41,21 @@ const playMechanics = (function(){
     i = 0;
     loopThroughSeqArr();
   };
-  seqArr = ['q1', 'q2', 'q1'];
 
 
   // event listeners for clicks on quarters
   // -- calls boardDetails.playRightQ(qx)
   // -- calls render
+
+  const handleQuarterClicked = function() {
+    $('.quarter').on('click', function(event){
+      const id = $(this)[0].id;
+      boardDetails.playRightQ(id);
+      respArr.push(id);
+      render();
+    });
+  };
+  
 
   // event listener on Start
   // -- enables clicks
@@ -51,8 +64,7 @@ const playMechanics = (function(){
 
   const handleStartClicked = function(){
     $('#start-button').on('click', function(event){
-      console.log('working');
-      playSeqArr();
+      console.log('start button clicked!');
     });
   };
   
@@ -63,6 +75,7 @@ const playMechanics = (function(){
 
   const bindEventListeners = function(){
     handleStartClicked();
+    handleQuarterClicked();
   };
 
   return {
