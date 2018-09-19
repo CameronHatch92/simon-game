@@ -25,7 +25,12 @@ const playMechanics = (function(){
   };
 
   const gameCheck = function(){
-    console.log('check for end of game');
+    let j = state.count-1;
+    if (state.respArr.length === 0){}
+    else if (state.respArr[j] === state.seqArr[j]){
+      state.seqArr.push(boardDetails.randomQ());
+      playSeqArr();
+    }
   };
 
   const enableClicks = function(){
@@ -44,6 +49,7 @@ const playMechanics = (function(){
     }
 
     state.count = state.seqArr.length;
+    $('#counter').html(`${state.count}`);
   };
 
   // function to play through seqArr
@@ -96,6 +102,7 @@ const playMechanics = (function(){
       state.seqArr = [];
       state.respArr = [];
       state.seqArr.push(boardDetails.randomQ());
+      playSeqArr();
       render();
     });
   };
