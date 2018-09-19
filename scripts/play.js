@@ -4,11 +4,13 @@
 const playMechanics = (function(){
 
   // initial state of gamePlay
-  let seqArr = [];
-  let respArr = [];
-  let strictMode = false;
-  let count = 0;
-  let clicks = true;
+  const state = {
+    seqArr: [],
+    respArr: [],
+    strictMode: false,
+    count: 0,
+    clicks: true
+  };
 
   //render function
   // -- checks for strict mode
@@ -17,20 +19,40 @@ const playMechanics = (function(){
   //    end game (disable clicks)
   //    adds one to seqArr and plays (disable clicks)
   // -- checks for end of game
-  // -- enables/disables clicks
   // -- updated counter
+  const strictGameCheck = function(){
+    console.log('strict');
+  };
+
+  const gameCheck = function(){
+    console.log('check for end of game');
+  };
+
+  const enableClicks = function(){
+    $('.quarter').on('click', quarterClick); 
+  };
+
+  const disableClicks = function(){
+    $('.quarter').off('click');
+  };
 
   const render = function(){
-    console.log('rendered');
+    if (state.strictMode){
+      strictGameCheck();
+    }else {
+      gameCheck();
+    }
+
+    state.count = state.seqArr.length;
   };
 
   // function to play through seqArr
   // -- enables clicks after it's done and renders
   let i = 0;
   const loopThroughSeqArr = function(){
-    if (i < seqArr.length){
+    if (i < state.seqArr.length){
       setTimeout(function(){
-        boardDetails.playRightQ(seqArr[i]);
+        boardDetails.playRightQ(state.seqArr[i]);
         i++;
         loopThroughSeqArr();
       }, 750);
@@ -47,13 +69,15 @@ const playMechanics = (function(){
   // -- calls boardDetails.playRightQ(qx)
   // -- calls render
 
+  const quarterClick = function(event){
+    const id = $(event.target)[0].id;
+    boardDetails.playRightQ(id);
+    state.respArr.push(id);
+    render();
+  };
+
   const handleQuarterClicked = function() {
-    $('.quarter').on('click', function(event){
-      const id = $(this)[0].id;
-      boardDetails.playRightQ(id);
-      respArr.push(id);
-      render();
-    });
+    $('.quarter').on('click', quarterClick);
   };
   
 
@@ -65,6 +89,9 @@ const playMechanics = (function(){
   const handleStartClicked = function(){
     $('#start-button').on('click', function(event){
       console.log('start button clicked!');
+      if (!state.clicks) {
+        state.clicks = true;
+        enableClicks();}
     });
   };
   
@@ -72,7 +99,13 @@ const playMechanics = (function(){
   // -- toggles strictMode
 
   const handleStrictClicked = function(){
-    console.log('strict button clicked');
+    $('#strict-button').on('click', function(event){
+      console.log('strict button clicked');
+      state.clicks = false;
+      console.log(state.clicks);
+      disableClicks();
+      render();
+    });
   };
 
 
@@ -83,7 +116,8 @@ const playMechanics = (function(){
   };
 
   return {
-    bindEventListeners
+    bindEventListeners,
+    render
   };
 })();
 
