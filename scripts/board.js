@@ -64,11 +64,13 @@ const boardDetails = (function(){
     }
   };
 
+  const randomQ = function(){
+    const i = Math.floor(Math.random()*4+1);
+    return `q${i}`;
+  };
+
   return {
-    q1Play,
-    q2Play,
-    q3Play,
-    q4Play,
-    playRightQ
+    playRightQ,
+    randomQ
   };
 })();

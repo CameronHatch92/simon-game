@@ -91,7 +91,12 @@ const playMechanics = (function(){
       console.log('start button clicked!');
       if (!state.clicks) {
         state.clicks = true;
-        enableClicks();}
+        enableClicks();
+      }
+      state.seqArr = [];
+      state.respArr = [];
+      state.seqArr.push(boardDetails.randomQ());
+      render();
     });
   };
   
