@@ -71,11 +71,15 @@ const playMechanics = (function(){
   // event listener on Strict
   // -- toggles strictMode
 
+  const handleStrictClicked = function(){
+    console.log('strict button clicked');
+  };
 
 
   const bindEventListeners = function(){
     handleStartClicked();
     handleQuarterClicked();
+    handleStrictClicked();
   };
 
   return {
