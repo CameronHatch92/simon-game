@@ -26,10 +26,19 @@ const playMechanics = (function(){
 
   const gameCheck = function(){
     let j = state.count-1;
-    if (state.respArr.length === 0){}
-    else if (state.respArr[j] === state.seqArr[j]){
+    if (state.seqArr.length === 0){
       state.seqArr.push(boardDetails.randomQ());
       playSeqArr();
+    } else if (state.respArr.length < state.seqArr.length){
+      for(let j=0; j<state.respArr.legnth; j++){
+        if (state.respArr[j] !== state.seqArr[j]){
+          
+        }
+      }
+    } else if (state.respArr[j] === state.seqArr[j]){
+      state.seqArr.push(boardDetails.randomQ());
+      playSeqArr();
+      state.respArr = [];
     }
   };
 
@@ -80,6 +89,7 @@ const playMechanics = (function(){
     boardDetails.playRightQ(id);
     state.respArr.push(id);
     render();
+    console.log(state.seqArr, state.respArr);
   };
 
   const handleQuarterClicked = function() {
@@ -101,8 +111,6 @@ const playMechanics = (function(){
       }
       state.seqArr = [];
       state.respArr = [];
-      state.seqArr.push(boardDetails.randomQ());
-      playSeqArr();
       render();
     });
   };
