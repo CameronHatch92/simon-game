@@ -30,15 +30,21 @@ const playMechanics = (function(){
       state.seqArr.push(boardDetails.randomQ());
       playSeqArr();
     } else if (state.respArr.length < state.seqArr.length){
-      for(let j=0; j<state.respArr.legnth; j++){
-        if (state.respArr[j] !== state.seqArr[j]){
-          
+      for(let k=0; k<state.respArr.length; k++){
+        if (state.respArr[k] !== state.seqArr[k]){
+          alert('Mistake!');
+          state.respArr = [];
+          playSeqArr();
         }
       }
     } else if (state.respArr[j] === state.seqArr[j]){
       state.seqArr.push(boardDetails.randomQ());
       playSeqArr();
       state.respArr = [];
+    } else {
+      alert('Mistake!');
+      state.respArr = [];
+      playSeqArr();
     }
   };
 
