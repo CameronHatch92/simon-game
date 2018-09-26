@@ -32,19 +32,23 @@ const playMechanics = (function(){
     } else if (state.respArr.length < state.seqArr.length){
       for(let k=0; k<state.respArr.length; k++){
         if (state.respArr[k] !== state.seqArr[k]){
-          alert('Mistake!');
+          setTimeout(function() {
+            alert('Mistake!');
+          }, 750);
+          setTimeout(playSeqArr, 750);
           state.respArr = [];
-          playSeqArr();
         }
       }
     } else if (state.respArr[j] === state.seqArr[j]){
       state.seqArr.push(boardDetails.randomQ());
-      playSeqArr();
+      setTimeout(playSeqArr, 750);
       state.respArr = [];
     } else {
-      alert('Mistake!');
+      setTimeout(function() {
+        alert('Mistake!');
+      }, 750);
+      setTimeout(playSeqArr, 750);
       state.respArr = [];
-      playSeqArr();
     }
   };
 
