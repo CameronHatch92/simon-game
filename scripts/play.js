@@ -9,7 +9,7 @@ const playMechanics = (function(){
     respArr: [],
     strictMode: false,
     count: 0,
-    clicks: true
+    inPlay: false
   };
 
   //render function
@@ -33,40 +33,41 @@ const playMechanics = (function(){
       for(let k=0; k<state.respArr.length; k++){
         if (state.respArr[k] !== state.seqArr[k]){
           setTimeout(function() {
-            alert('Mistake!');
+            alert('Mistake! Try Again.');
           }, 750);
           setTimeout(playSeqArr, 750);
           state.respArr = [];
         }
       }
     } else if (state.respArr[j] === state.seqArr[j]){
-      state.seqArr.push(boardDetails.randomQ());
-      setTimeout(playSeqArr, 750);
-      state.respArr = [];
+      if(j<19){
+        state.seqArr.push(boardDetails.randomQ());
+        setTimeout(playSeqArr, 750);
+        state.respArr = [];
+      } else{
+        alert('Congratulations! You won!');
+        state.inPlay = false;
+        render();
+      }
     } else {
       setTimeout(function() {
-        alert('Mistake!');
+        alert('Mistake! Try Again.');
       }, 750);
       setTimeout(playSeqArr, 750);
       state.respArr = [];
     }
   };
 
-  const enableClicks = function(){
-    $('.quarter').on('click', quarterClick); 
-  };
-
-  const disableClicks = function(){
-    $('.quarter').off('click');
-  };
-
   const render = function(){
-    if (state.strictMode){
-      strictGameCheck();
-    }else {
-      gameCheck();
+    if(state.inPlay){
+      if (state.strictMode){
+        strictGameCheck();
+      }else {
+        gameCheck();
+      }
+    } else{
+      state.seqArr = [];
     }
-
     state.count = state.seqArr.length;
     $('#counter').html(`${state.count}`);
   };
@@ -97,8 +98,10 @@ const playMechanics = (function(){
   const quarterClick = function(event){
     const id = $(event.target)[0].id;
     boardDetails.playRightQ(id);
-    state.respArr.push(id);
-    render();
+    if(state.inPlay){
+      state.respArr.push(id);
+      render();
+    }
     console.log(state.seqArr, state.respArr);
   };
 
@@ -115,13 +118,10 @@ const playMechanics = (function(){
   const handleStartClicked = function(){
     $('#start-button').on('click', function(event){
       console.log('start button clicked!');
-      if (!state.clicks) {
-        state.clicks = true;
-        enableClicks();
-      }
+      state.inPlay = true;
       state.seqArr = [];
       state.respArr = [];
-      render();
+      setTimeout(render(), 750);
     });
   };
   
@@ -131,9 +131,7 @@ const playMechanics = (function(){
   const handleStrictClicked = function(){
     $('#strict-button').on('click', function(event){
       console.log('strict button clicked');
-      state.clicks = false;
-      console.log(state.clicks);
-      disableClicks();
+      state.inPlay = false;
       render();
     });
   };
